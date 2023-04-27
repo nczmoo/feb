@@ -3,7 +3,7 @@ class UI{
 
 	}
 	refresh(){
-
+		$("#rhythm").html(game.config.rhythm);
 	}
 
 	formatID(id){
