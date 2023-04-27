@@ -1,19 +1,47 @@
-class Config {    
+class Config {
+    static actions = ['move-away', 'move-enemy', 'jump', 'punch', 'kick', 'block'];
+    cards = [];
     characters = [];
     dmg = { kick: 10, punch: 5 };
     enemies = [1, 0];
+    hands = [];
     maxX = 10;
+    numOfCards = 6;
     numOfCharacters = 2;
     rhythm = null;
-    rhythms = ['a', 'b', 'c', 'd'];
+    static rhythms = ['a', 'b', 'c', 'd'];
     startHealth = 100;
-    startX = [0];
+    startX = [1];
+    steps = 0;
 	constructor(){        
         this.fetchRandRhythm();
         this.startX.push(this.maxX);
         for (let i = 0; i < this.numOfCharacters; i++){
             this.characters.push(new Character(this.startHealth, this.startX[i]));
         }
+        for (let charID = 0; charID < this.numOfCharacters; charID++){       
+            let actionsIn = [];
+             this.cards.push([]);
+             this.hands.push([]);
+            for (let i = 0; i < this.numOfCards; i ++){
+                while(1){
+                    let card = new Card();
+                    if (actionsIn.length < Config.actions.length 
+                        && actionsIn.includes(card.action)){                
+                        continue;
+                    }
+                    actionsIn.push(card.action);
+                    this.hands[charID].push(card);
+                    break;
+                }
+                            
+            }
+        }
+        console.log(this.cards, this.hands);
+    }
+
+    block(){
+
     }
 
     fetchCharAt(x, y){
@@ -37,25 +65,25 @@ class Config {
 	}
 
     fetchRandRhythm(){
-        while (1){
-            let rand = this.rhythms[randNum(0, this.rhythms.length - 1)];
+        while (1){            
+            let rand = Config.rhythms[randNum(0, Config.rhythms.length - 1)];
             if (this.rhythm == rand){
                 continue;
-            }
-
-            this.rhythm = rand;
-            return;
+            }            
+            return rand;
         }
     }
 
     hit(req){
         let distanceBtw = distance(this.characters[0].x, this.characters[1].x, 
             this.characters[0].y, this.characters[1].y);
-        return (req < distanceBtw);            
+        
+        return (req >= distanceBtw);            
     }
  
     isItInRange(x, y){
-        return !(x < 1 || x > this.maxX || y < 1 || y > 2);
+        let val = (x > 0 && x <= this.maxX && y >= 0 && y <= 2);
+        return val;
     }
 
     isEnemyThere(x, y, charID){
@@ -67,9 +95,7 @@ class Config {
 
     jump(charID){
         let char = this.characters[charID];                
-        if (char.y == 0){
-            char.y ++;
-        }
+        
     }
 
     kick(charID){
@@ -91,12 +117,13 @@ class Config {
     move(charID, direction){
         let char = this.characters[charID];                
         let xDelta = this.fetchDirOfEnemy(charID);
-        let otherDir = [1, null, -1];
+        //let otherDir = [1, null, -1];
         if (direction = 'away'){
-            xDelta = otherDir[xDelta];
+            xDelta = -xDelta;
         }
         let newX = char.x + xDelta;
-        if (this.isItInRange(newX, 0) && !this.isEnemyThere(newX, 0, charID)){
+        let inRange = this.isItInRange(newX, 0);
+        if (inRange && !this.isEnemyThere(newX, 0, charID)){
             this.characters[charID].x = newX;
         }
 

@@ -22,13 +22,31 @@
 			height: 40px;
 			display:inline-block;
 		}
+
+		.highlighted {
+			font-weight: bold;
+			background-color:gainsboro;
+		}
 	</style>
 </head>
 <body>
-	<div id="rhythm" class="text-center fw-bold fs-1"></div>
-	<div id='characters' class="row"></div>
-	<div id="board" class="text-center mt-1"></div>
-
+	<div id="game" class="window">
+		<div id="rhythm" class="text-center fw-bold fs-1"></div>
+		<div id='characters' class="row"></div>
+		<div id="board" class="text-center mt-1"></div>
+		<div id="" class="row">
+			<div id='cards-0' class="col"></div>
+			<div id='cards-1' class="col"></div>
+		</div>
+		<div id="log" class="text-center"></div>
+		<div class="text-center">
+			<button id="menu-hand" class="form-control menu btn btn-info p-5">play card</button>
+		</div>
+	</div><div id="hand" class="window d-none">
+		<div><button id='menu-game' class="form-control btn btn-info menu">back</button></div>
+		<div id="cardsInHand"></div>
+	</div>
+	
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 	<script src='https://code.jquery.com/jquery-3.6.0.js'></script>
@@ -37,6 +55,7 @@
 	<script src='js/Game.js'></script>
 	<script src="js/Loop.js"></script>
 	<script src='js/Character.js'></script> 
+	<script src='js/Card.js'></script> 
 
 	<!--
 	<script src='js/ '></script> 

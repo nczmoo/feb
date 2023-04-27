@@ -7,7 +7,7 @@ TODO
     
     x Create rhythm system
     
-    Create characters
+    x Create characters
         Actions
             Move left 
             Move right
