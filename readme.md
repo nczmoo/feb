@@ -26,6 +26,8 @@ TODO
 
 
 QUESTIONS
+    Insted of (left, right), maybe it should be towards enemy, away
+
 
 DESIGN
     So what I'm thinking is having a rhythm system whenever a certain symbol is triggered, that can trigger a specific thing as a way of creating an automatic system to motivate movement instead of having the player manually control it.

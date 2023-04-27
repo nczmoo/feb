@@ -6,4 +6,6 @@ class Game{
 	constructor(){		
 		this.loopInterval = setInterval(this.loop.looping, 1000);
 	}
+
+	
 }
