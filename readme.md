@@ -16,17 +16,17 @@ TODO
             Kick
             Block
 
-    Create cards that move players
+    x Create cards that move players
         Trigger Context: Before, When, After
         Trigger Content: actions or rhythms
         Action: action
 
-    Play cards
+    x Play cards
         It's a 10 second timer to play or remove cards and that goes up with each additional card.
 
 
 QUESTIONS
-    Insted of (left, right), maybe it should be towards enemy, away
+    x Insted of (left, right), maybe it should be towards enemy, away
 
 
 DESIGN
