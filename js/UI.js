@@ -13,6 +13,10 @@ class UI{
 		this.printLog();		
 	}
 
+	fetchAction(action){
+		return "<img src='img/" + action + ".png'>";
+	}
+
 	formatID(id){
 		return Number(id) + 1;
 	}
@@ -50,7 +54,7 @@ class UI{
 
 		txt +=  "<div>Trigger: " + card.when + " " + card.thisHappens + "</div>"
 			+ "<div class='mt-3 mb-3 cards " + charID + "-" + card.when + "-" 
-			+ card.thisHappens + "'>" + card.action + "</div>";
+			+ card.thisHappens + "'>" + card.action + " " + this.fetchAction(card.action) + "</div>";
 		if (isHand){
 			txt += "<div><button id='play-" + cardID + "' class='btn btn-primary verb1'>play</button></div>";
 		}

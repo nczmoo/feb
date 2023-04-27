@@ -6,7 +6,7 @@ class Config {
     enemies = [1, 0];
     hands = [];
     maxX = 10;
-    numOfCards = 6;
+    numOfCards = 10;
     numOfCharacters = 2;
     rhythm = null;
     static rhythms = ['a', 'b', 'c', 'd'];
