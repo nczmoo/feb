@@ -59,16 +59,23 @@ class UI{
 		if (isHand){
 			card = game.config.hands[charID][cardID];
 		}		
-		let txt = "<div class=' card text-center col'>";
+		let txt = "<div class='col text-center'> <div class='card'>";
 		if (!isHand && charID == 0 && game.paused){
 			txt += "<div><button id='remove-" + cardID + "' class='btn btn-danger verb1'>x</button></div>";
 		}
 
-		txt +=  "<div class='" + card.thisHappens + "'>Trigger: " + card.when + " " + card.thisHappens + "</div>"
-			+ "<div class='mt-3 mb-3 cards " + charID + "-" + card.when + "-" 
-			+ card.thisHappens + "'>" + card.action + " " + this.fetchAction(card.action) + "</div>";
+		txt +=  "<div>Triggers " + card.when + "</div>";
+		if (Config.actions.includes(card.thisHappens)){
+			txt += "<div><img src='img/" + card.thisHappens + "-sm.png'></div>";
+		}
+		
+		txt	+= "<div class='" + card.thisHappens + "'>" + card.thisHappens + "</div>"		
+			+ "<div class='mt-3 mb-3 pt-3 cards border-top " + charID + "-" + card.when + "-" 
+			+ card.thisHappens + "'><div>" + this.fetchAction(card.action) 
+			+ "</div><div>" +  card.action + "</div></div>";
+		txt += "</div>";
 		if (isHand){
-			txt += "<div><button id='play-" + cardID + "' class='btn btn-primary verb1'>play</button></div>";
+			txt += "<div><button id='play-" + cardID + "' class='btn btn-primary verb1 form-control'>play</button></div>";
 		}
 		txt += "</div>";
 		return txt;
