@@ -56,17 +56,17 @@ class Game{
 		this.config.cards[1].push(card);
 		ui.printHand();
 		ui.printCards();
-		ui.menu('menu-game');
+		
 	}
 
 	remove(cardID){
-		//console.log(this.config.hands, this.config.cards);
-
+		let card = this.config.cards[0][cardID];
 		this.config.hands[0].push(this.config.cards[0].splice(cardID, 1)[0]);
-		//console.log(this.config.hands, this.config.cards);
-
-		this.config.hands[1].push(this.config.cards[1].splice(randNum(0, this.config.cards.length - 1), 1)[0]);
-		//console.log(this.config.hands, this.config.cards);
+		let enemyCardID = this.fetchCardOfAction(1, card.action, 'cards');
+		if (enemyCardID == null){
+			enemyCardID = randNum(0, this.config.cards.length - 1)
+		}
+		this.config.hands[1].push(this.config.cards[1].splice(enemyCardID, 1)[0]);
 		ui.printHand();
 		ui.printCards();
 	}

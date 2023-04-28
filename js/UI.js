@@ -6,6 +6,10 @@ class UI{
 	}
 
 	refresh(){
+		for (let i of Config.rhythms){
+			$("#rhythm").removeClass(i);
+		}
+		$("#rhythm").addClass(game.config.rhythm);
 		$("#rhythm").html(game.config.rhythm);
 		this.printCharacters();
 		this.printBoard();
@@ -47,7 +51,7 @@ class UI{
 		if (isHand){
 			card = game.config.hands[charID][cardID];
 		}		
-		let txt = "<div class=' card text-center'>";
+		let txt = "<div class=' card text-center col'>";
 		if (!isHand && charID == 0){
 			txt += "<div><button id='remove-" + cardID + "' class='btn btn-danger verb1'>x</button></div>";
 		}

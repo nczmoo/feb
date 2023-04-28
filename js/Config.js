@@ -1,5 +1,5 @@
 class Config {
-    static actions = ['move-away', 'move-enemy', 'punch', 'kick', 'block'];
+    static actions = ['block', 'kick', 'punch', 'move-away', 'move-enemy', ];
     cards = [];
     characters = [];
     dmg = { kick: 10, punch: 5 };
@@ -39,6 +39,7 @@ class Config {
                             
             }
         }
+        this.sort();
     }
 
     block(){
@@ -143,5 +144,18 @@ class Config {
         }
 
         enemy.getHit(this.dmg.punch);
+   }
+
+   sort(){
+    let newStack = [];
+    for (let action of Config.actions){
+        for (let cardID in this.hands[0]){
+            let card = this.hands[0][cardID];
+            if (card.action == action){
+                newStack.push(card);
+            }
+        }
+    }
+    this.hands[0] = newStack;
    }
 }
