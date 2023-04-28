@@ -17,8 +17,10 @@ class Character {
     }
 
     die(){
+        game.paused = true;
         alert("Someone died.");                    
-        window.reload();
+
+        location.reload();
     }
 
     getHit(dmg){

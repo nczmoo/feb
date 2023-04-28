@@ -21,6 +21,9 @@ class Game{
 	}
 
 	process(charID, when, thisHappens){
+		if (this.paused){
+			return;
+		}
 		if (this.config.characters[charID].stunned){
 			console.log(charID + ": can't do shit - stunned");
 			return;

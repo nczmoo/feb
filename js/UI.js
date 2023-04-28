@@ -59,18 +59,20 @@ class UI{
 		if (isHand){
 			card = game.config.hands[charID][cardID];
 		}		
-		let txt = "<div class='col text-center'> <div class='card'>";
-		if (!isHand && charID == 0 && game.paused){
+		let txt = "<div class='col text-center'> <div class='card mt-3'>";
+		if (!isHand && charID == 0 && !game.started){
 			txt += "<div><button id='remove-" + cardID + "' class='btn btn-danger verb1'>x</button></div>";
 		}
 
 		txt +=  "<div>Triggers " + card.when + "</div>";
+		let happensCaption = card.thisHappens;
 		if (Config.actions.includes(card.thisHappens)){
 			txt += "<div><img src='img/" + card.thisHappens + "-sm.png'></div>";
+			happensCaption = '';
 		}
 		
-		txt	+= "<div class='" + card.thisHappens + "'>" + card.thisHappens + "</div>"		
-			+ "<div class='mt-3 mb-3 pt-3 cards border-top " + charID + "-" + card.when + "-" 
+		txt	+= "<div class='" + card.thisHappens + "'>" + happensCaption + "</div>"		
+			+ "<div class='mt-3 mb-3 pt-3 cards border-top-secondary " + charID + "-" + card.when + "-" 
 			+ card.thisHappens + "'><div>" + this.fetchAction(card.action) 
 			+ "</div><div>" +  card.action + "</div></div>";
 		txt += "</div>";
