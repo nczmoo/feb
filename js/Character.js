@@ -16,12 +16,19 @@ class Character {
         this.blocking = true;
     }
 
+    die(){
+        alert("Someone died.");                    
+        window.reload();
+    }
+
     getHit(dmg){
         if (this.stunned > 0){
             this.stunned = 0;
         }
         this.health -= dmg;
-        return this.health < 0;                    
+        if (this.health <= 0){
+            this.die();
+        }
     }
 
     jump(){

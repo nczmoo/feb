@@ -68,6 +68,7 @@ class Game{
 	remove(cardID){
 		let card = this.config.cards[0][cardID];
 		this.config.hands[0].push(this.config.cards[0].splice(cardID, 1)[0]);
+		this.config.sort();
 		let enemyCardID = this.fetchCardOfAction(1, card.action, 'cards');
 		if (enemyCardID == null){
 			enemyCardID = randNum(0, this.config.cards.length - 1)

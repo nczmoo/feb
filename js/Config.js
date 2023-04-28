@@ -110,6 +110,8 @@ class Config {
     }
 
     kick(charID){
+        let distanceBtw = distance(this.characters[0].x, this.characters[1].x, 
+            this.characters[0].y, this.characters[1].y);
         let enemyID = this.enemies[charID];
         let hitThem = this.hit(2);
         let enemy = this.characters[enemyID];
@@ -123,8 +125,11 @@ class Config {
             this.characters[charID].stun();
             return;
         }
-
-        let died = enemy.getHit(this.dmg.kick);
+        let damage = this.dmg.kick;
+        if (distanceBtw < 2){
+            damage = Math.round(this.dmg.kick / 3);
+        }
+        let died = enemy.getHit(damage);
         if (died){
             alert ("Character #" + enemyID + " died,");
         }
@@ -160,14 +165,13 @@ class Config {
         if (!hitThem){
             return;
         }
-        console.log(charID, enemy.blocking);
         if (enemy.blocking){
             this.characters[charID].stun();
             return;
         }
 
         let died = enemy.getHit(this.dmg.punch);
-        if (died){
+        if (died){            
             alert ("Character #" + enemyID + " died,");
         }
    }

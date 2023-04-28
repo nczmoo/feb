@@ -29,6 +29,9 @@ TODO
     BUG: recursive loop that crashes game, just trying to figure out a good way to stop.
     BUG: there's a kick that's triggered by before punch and a punch that's triggered by before kick and that's it.
     
+    instead of ending the game at the ten second timer, both players can add another card.
+
+    
 
 QUESTIONS
     x Insted of (left, right), maybe it should be towards enemy, away
@@ -39,3 +42,4 @@ DESIGN
 
 
 MAYBE
+    what if when a player gets to half health, they get to change their cards? Maybe the other doesn't until they get to half health. Or maybe they just get to change the same number of cards as tthe other person.
