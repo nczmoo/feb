@@ -23,7 +23,10 @@ TODO
 
     x Play cards
         It's a 10 second timer to play or remove cards and that goes up with each additional card.
-    BUG: before move-enemy wasn't activating, onyl the rhythms
+
+    x BUG: before move-enemy wasn't activating, onyl the rhythms
+    
+    BUG: recursive loop that crashes game, just trying to figure out a good way to stop.
 
 QUESTIONS
     x Insted of (left, right), maybe it should be towards enemy, away

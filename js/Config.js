@@ -39,7 +39,6 @@ class Config {
                             
             }
         }
-        console.log(this.cards, this.hands);
     }
 
     block(){
@@ -59,7 +58,6 @@ class Config {
     fetchDirOfEnemy(charID){
 		let them = this.characters[charID];
         let enemy = this.characters[this.enemies[charID]];
-    
         if (them.x > enemy.x){
             return -1;
         }
@@ -124,7 +122,6 @@ class Config {
             xDelta = -xDelta;
         }
         let newX = char.x + xDelta;
-        console.log(direction, char.x, newX);
         let inRange = this.isItInRange(newX, 0);
         if (inRange && !this.isEnemyThere(newX, 0, charID)){
             this.characters[charID].x = newX;

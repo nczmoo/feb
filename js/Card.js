@@ -17,7 +17,7 @@ class Card {
         this.thisHappens = this.triggers[randNum(0, this.triggers.length - 1)];
         while (1){
             let rand = Config.actions[randNum(0, Config.actions.length - 1)];
-            if (rand == this.thisHappens == rand){
+            if (rand == this.thisHappens){
                 continue;
             }
             this.action = rand;
