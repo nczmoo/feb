@@ -3,12 +3,16 @@ class Config {
     cards = [];
     characters = [];
     dmg = { kick: 10, punch: 5 };
+    drawTimer = null;
     enemies = [1, 0];
     hands = [];
+    
+    maxTimer = 10;
     maxX = 10;
     numOfCards = 10;
     numOfCharacters = 2;
     rhythm = null;
+    shortestDistance = null;
     static rhythms = ['a', 'b', 'c', 'd'];
     startHealth = 100;
     startX = [1];
@@ -40,6 +44,8 @@ class Config {
             }
         }
         this.sort();
+        this.drawTimer = Date.now();
+        
     }
 
     block(){
@@ -75,10 +81,14 @@ class Config {
         }
     }
 
+    fetchTimer(){
+        return Math.round((Date.now() - game.config.drawTimer) / 1000 )
+    }
+
     hit(req){
         let distanceBtw = distance(this.characters[0].x, this.characters[1].x, 
             this.characters[0].y, this.characters[1].y);
-        
+        this.drawTimer = Date.now();
         return (req >= distanceBtw);            
     }
  
@@ -108,17 +118,24 @@ class Config {
             return;
         }
 
-        if (enemy.blocked){
+        if (enemy.blocking){
+            console.log("BLOCKED");
+            this.characters[charID].stun();
             return;
         }
 
-        enemy.getHit(this.dmg.kick);
+        let died = enemy.getHit(this.dmg.kick);
+        if (died){
+            alert ("Character #" + enemyID + " died,");
+        }
     }
 
     move(charID, direction){
         let char = this.characters[charID];                
         let xDelta = this.fetchDirOfEnemy(charID);
         //let otherDir = [1, null, -1];
+        
+
         if (direction == 'away'){
             xDelta = -xDelta;
         }
@@ -127,7 +144,12 @@ class Config {
         if (inRange && !this.isEnemyThere(newX, 0, charID)){
             this.characters[charID].x = newX;
         }
-
+        let distanceBtwn= distance(this.characters[0].x, this.characters[1].x, 
+            this.characters[0].y, this.characters[1].y);
+        if (this.shortestDistance == null || distanceBtwn < this.shortestDistance){
+            this.shortestDistance = distanceBtwn;
+            this.drawTimer = Date.now();
+        }
     }
 
     punch(charID){        
@@ -138,12 +160,16 @@ class Config {
         if (!hitThem){
             return;
         }
-
-        if (enemy.blocked){
+        console.log(charID, enemy.blocking);
+        if (enemy.blocking){
+            this.characters[charID].stun();
             return;
         }
 
-        enemy.getHit(this.dmg.punch);
+        let died = enemy.getHit(this.dmg.punch);
+        if (died){
+            alert ("Character #" + enemyID + " died,");
+        }
    }
 
    sort(){

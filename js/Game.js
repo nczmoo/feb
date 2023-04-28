@@ -1,7 +1,9 @@
 class Game{
 	config = new Config();
+	
 	loop = new Loop();
 	loopInterval = null;
+	paused = true;
 	processing = 0;
 
 	constructor(){		
@@ -19,6 +21,10 @@ class Game{
 	}
 
 	process(charID, when, thisHappens){
+		if (this.config.characters[charID].stunned){
+			console.log(charID + ": can't do shit - stunned");
+			return;
+		}
 		if(this.processing > 10){
 			console.log(this.processing);
 		}
@@ -69,5 +75,11 @@ class Game{
 		this.config.hands[1].push(this.config.cards[1].splice(enemyCardID, 1)[0]);
 		ui.printHand();
 		ui.printCards();
+	}
+
+	start(){
+		this.config.drawTimer = Date.now();
+		this.paused = false;
+		ui.gameStarted = true;
 	}
 }

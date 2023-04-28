@@ -44,7 +44,11 @@
 </head>
 <body>
 	<div id="game" class="window">
+		<div id="" class="text-center mb-3">
+			If no damage or distance closed in <span id="timer"></span>/<span id="maxTimer"></span> seconds, game ends in draw.
+		</div>
 		<div id="rhythm" class="text-center fw-bold fs-1"></div>
+		
 		<div id='characters' class="row"></div>
 		<div id="board" class="text-center mt-1"></div>
 		<div id="" class="row">
@@ -56,6 +60,7 @@
 			<button id="menu-hand" class="form-control menu btn btn-info p-5">play card</button>
 		</div>
 		<div id="cardsInHand" class="row mt-5"></div>
+		<div id="startDiv"><button  id='start' class='start btn btn-success form-control p-5 mt-5 verb0'>start</button></div>
 	</div><div id="hand" class="window d-none">
 		<div><button id='menu-game' class="form-control btn btn-info menu">back</button></div>
 		

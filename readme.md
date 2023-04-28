@@ -27,6 +27,8 @@ TODO
     x BUG: before move-enemy wasn't activating, onyl the rhythms
     
     BUG: recursive loop that crashes game, just trying to figure out a good way to stop.
+    BUG: there's a kick that's triggered by before punch and a punch that's triggered by before kick and that's it.
+    
 
 QUESTIONS
     x Insted of (left, right), maybe it should be towards enemy, away

@@ -1,4 +1,5 @@
 class UI{
+	gameStarted = false;
 	log = [];
 	constructor(){
 		this.printCards();
@@ -6,6 +7,10 @@ class UI{
 	}
 
 	refresh(){
+		if (!game.paused && this.gameStarted){
+			$("#startDiv").addClass('d-none');
+			$("#cardsInHand").addClass('d-none');
+		}
 		for (let i of Config.rhythms){
 			$("#rhythm").removeClass(i);
 		}
@@ -15,6 +20,9 @@ class UI{
 		this.printBoard();
 		
 		this.printLog();		
+
+		$("#timer").html(game.config.fetchTimer());
+		$("#maxTimer").html(game.config.maxTimer);
 	}
 
 	fetchAction(action){
@@ -52,7 +60,7 @@ class UI{
 			card = game.config.hands[charID][cardID];
 		}		
 		let txt = "<div class=' card text-center col'>";
-		if (!isHand && charID == 0){
+		if (!isHand && charID == 0 && game.paused){
 			txt += "<div><button id='remove-" + cardID + "' class='btn btn-danger verb1'>x</button></div>";
 		}
 
@@ -84,23 +92,24 @@ class UI{
 			game.config.characters[1].x, game.config.characters[1].y, 
 			game.config.characters[1].y);
 		for (let charID in game.config.characters){
-			let blocking = '', char = game.config.characters[charID];
+			let blockingOrStunned = '', char = game.config.characters[charID];
 			let progressClass = '';
 			if (charID == 1){
 				progressClass = ' bg-danger ';
 			}
-			if (char.blocking){
-				blocking = ' blocking ';
+			if (char.stunned){
+				blockingOrStunned = ' STUNNED ';
+			} else if (char.blocking){
+				blockingOrStunned = ' BLOCKING ';
 			}
 			let width = char.health / char.maxHealth * 100;
 
-			txt += "<div class='col'>";
-			txt += "<div class='text-center'>" + char.x + ", " + char.y + ": " 
-				+ blocking + "</div>";
-			txt += "<div>hp: " + char.health + "/" + char.maxHealth + "</div>";
-			txt += "<div class='progress'><div class='progress-bar " + progressClass + "' " 
-				+ "role='progressbar' style='width: " + width + "%' ></div></div>";
-			txt += "</div>";
+			txt += "<div class='col'>"
+				+ "<div class='text-center'>"  + blockingOrStunned + "</div>"
+				+ "<div>hp: " + char.health + "/" + char.maxHealth + "</div>"
+				+ "<div class='progress'><div class='progress-bar " + progressClass + "' " 
+				+ "role='progressbar' style='width: " + width + "%' ></div></div>"
+				+ "</div>";
 
 		}
 		$("#characters").html(txt);

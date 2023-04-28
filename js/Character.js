@@ -1,6 +1,8 @@
-class Character {    
+class Character {   
+    blocking = false; 
     health = null;        
     maxHealth = null;    
+    stunned = 0;
     x = null;
     y = 0;
 
@@ -15,6 +17,9 @@ class Character {
     }
 
     getHit(dmg){
+        if (this.stunned > 0){
+            this.stunned = 0;
+        }
         this.health -= dmg;
         return this.health < 0;                    
     }
@@ -42,5 +47,14 @@ class Character {
         if (this.y != 0){
             this.y --;
         }
+        if (this.stunned > 0){
+            console.log('step: ' + this.stunned);
+            this.stunned --;
+        }
+    }
+
+    stun(){
+        console.log('stun');
+        this.stunned +=  3;
     }
 }
