@@ -52,7 +52,7 @@ class UI{
 			txt += "<div><button id='remove-" + cardID + "' class='btn btn-danger verb1'>x</button></div>";
 		}
 
-		txt +=  "<div>Trigger: " + card.when + " " + card.thisHappens + "</div>"
+		txt +=  "<div class='" + card.thisHappens + "'>Trigger: " + card.when + " " + card.thisHappens + "</div>"
 			+ "<div class='mt-3 mb-3 cards " + charID + "-" + card.when + "-" 
 			+ card.thisHappens + "'>" + card.action + " " + this.fetchAction(card.action) + "</div>";
 		if (isHand){

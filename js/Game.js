@@ -15,7 +15,7 @@ class Game{
 
 			}	
 			$("." + charID + "-" + when + "-" + thisHappens).addClass('highlighted');
-			this.process('before', card.action);
+			this.process(charID, 'before', card.action);
 			ui.status(card.action);
 			if (card.action.split('-')[0] == 'move'){
 				this.config.characters[charID].move();
@@ -24,7 +24,7 @@ class Game{
 				this.config.characters[charID][card.action]();
 				this.config[card.action](charID);
 			}			
-			this.process('after', card.action);
+			this.process(charID, 'after', card.action);
 			
 		}
 	}

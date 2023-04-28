@@ -23,7 +23,7 @@ TODO
 
     x Play cards
         It's a 10 second timer to play or remove cards and that goes up with each additional card.
-
+    BUG: before move-enemy wasn't activating, onyl the rhythms
 
 QUESTIONS
     x Insted of (left, right), maybe it should be towards enemy, away

@@ -1,5 +1,5 @@
 class Config {
-    static actions = ['move-away', 'move-enemy', 'jump', 'punch', 'kick', 'block'];
+    static actions = ['move-away', 'move-enemy', 'punch', 'kick', 'block'];
     cards = [];
     characters = [];
     dmg = { kick: 10, punch: 5 };
@@ -20,17 +20,19 @@ class Config {
             this.characters.push(new Character(this.startHealth, this.startX[i]));
         }
         for (let charID = 0; charID < this.numOfCharacters; charID++){       
-            let actionsIn = [];
+            let actionsIn = [], triggers = [];
              this.cards.push([]);
              this.hands.push([]);
             for (let i = 0; i < this.numOfCards; i ++){
                 while(1){
                     let card = new Card();
-                    if (actionsIn.length < Config.actions.length 
-                        && actionsIn.includes(card.action)){                
+                    let trigger = card.when + "-" + card.thisHappens;
+                    if ((actionsIn.length < Config.actions.length 
+                        && actionsIn.includes(card.action)) || triggers.includes(trigger)){                
                         continue;
                     }
                     actionsIn.push(card.action);
+                    triggers.push(trigger);
                     this.hands[charID].push(card);
                     break;
                 }
@@ -55,9 +57,9 @@ class Config {
     }
 
     fetchDirOfEnemy(charID){
-        let opposition = [1, 0];
-		let enemy = this.characters[charID];
-        let them = this.characters[opposition[charID]];
+		let them = this.characters[charID];
+        let enemy = this.characters[this.enemies[charID]];
+    
         if (them.x > enemy.x){
             return -1;
         }
@@ -118,10 +120,11 @@ class Config {
         let char = this.characters[charID];                
         let xDelta = this.fetchDirOfEnemy(charID);
         //let otherDir = [1, null, -1];
-        if (direction = 'away'){
+        if (direction == 'away'){
             xDelta = -xDelta;
         }
         let newX = char.x + xDelta;
+        console.log(direction, char.x, newX);
         let inRange = this.isItInRange(newX, 0);
         if (inRange && !this.isEnemyThere(newX, 0, charID)){
             this.characters[charID].x = newX;

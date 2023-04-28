@@ -15,8 +15,15 @@ class Card {
         }
         this.when = this.contexts[randNum(0, this.contexts.length - 1)];
         this.thisHappens = this.triggers[randNum(0, this.triggers.length - 1)];
+        while (1){
+            let rand = Config.actions[randNum(0, Config.actions.length - 1)];
+            if (rand == this.thisHappens == rand){
+                continue;
+            }
+            this.action = rand;
+            break;
+        }
         
-        this.action = Config.actions[randNum(0, Config.actions.length - 1)];
         if (this.action == 'move-enemy' || this.action  == 'move-away'){
             this.thisHappens = Config.rhythms[randNum(0, Config.rhythms.length - 1)];
         }
